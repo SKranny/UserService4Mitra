@@ -1,0 +1,33 @@
+server:
+  port: ${SERVER_PORT:8082}
+
+spring:
+  application:
+    name: user-service
+  freemarker:
+    expose-request-attributes: true
+  flyway:
+    baseline-on-migrate: true
+    fail-on-missing-locations: false
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: ${PERSON_SERVICE_DATABASE_URL:jdbc:postgresql://localhost:5432/user-service}
+    username: postgres
+    password: ${USER_SERVICE_DATABASE_PASSWORD:pass}
+
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    properties:
+      hibernate:
+        ddl-auto: none
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+jwt:
+  secret-code: ${SECRET_KEY}
+
+springdoc:
+  swagger-ui:
+    path: /docs/
